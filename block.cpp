@@ -2,14 +2,15 @@
 
 Block::Block()
 {
-    cellsize=30;
+    // initial state of block
+    cellsize=45;
     rotationState=0;
     colors=GetCellColors();
     rowOffset=0;
     columnOffset=0;
 }
 
-void Block::Draw()
+void Block::Draw()          // Function to draw the block on the screen
 {
     vector<Position> tiles = GetCellPositions();
     for(Position item: tiles)
@@ -34,4 +35,22 @@ vector<Position> Block::GetCellPositions()
         movedTiles.push_back(newPos);
     }
     return movedTiles;
+}
+
+void Block::Rotate()
+{
+    rotationState++;
+    if(rotationState == (int)cells.size())
+    {
+        rotationState=0;
+    }
+}
+
+void Block::UndoRotation()
+{
+    rotationState --;
+    if(rotationState == -1)
+    {
+        rotationState = cells.size() -1;
+    }
 }

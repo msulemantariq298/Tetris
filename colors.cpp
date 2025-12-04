@@ -2,6 +2,7 @@
 #include<vector>
 using namespace std;
 
+// each color is set by {red,green,blue,alpha} combination
 const Color darkGrey = {26,31,40,255};
 const Color green = {47,230,23,255};
 const Color red = {232,18,18,255};
@@ -10,8 +11,10 @@ const Color yellow = {237,234,4,255};
 const Color purple = {166,0,247,255};
 const Color cyan = {21,204,209,255};
 const Color blue = {13,64,216,255};
+const Color lightblue = {59,85,162,255};
+const Color darkblue = {0,0,100,255};
 
-vector<Color> GetCellColors()
+vector<Color> GetCellColors()           // returns the color respectivly to the value passed to function
 {
     return {darkGrey,green,red,orange,yellow,purple,cyan,blue};
 }

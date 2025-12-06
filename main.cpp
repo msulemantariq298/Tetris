@@ -38,9 +38,20 @@ main()
         BeginDrawing();                          // a function of raylib used to do anything on the window
         ClearBackground(darkblue);               // clears the background and adds the color you want
         //DrawRectangleRounded({460,10,430,880},0.1,6,ORANGE);
-        DrawTextEx(font,"TETRIS",{570,20},64,4,WHITE); // Drawing the title text using custom font
+
+        // Drawing the title text using custom font
+        DrawTextEx(font,"TETRIS",{570,20},64,4,WHITE); 
+
+        // Draw Scoring System
         DrawTextEx(font,"SCORE",{590,150},64,4,WHITE);
-        DrawRectangleRounded({585,220,170,60},0.3,6,lightblue);
+        DrawRectangleRounded({578,220,190,70},0.3,6,lightblue);
+
+        char scoreText[10];
+        sprintf(scoreText,"%d",game.score);
+        Vector2 textSize=MeasureTextEx(font,scoreText,64,4);
+
+        DrawTextEx(font,scoreText,{578+(190-textSize.x)/2,220},64,4,WHITE);
+
         DrawTextEx(font,"NEXT",{610,350},64,4,WHITE);
         DrawRectangleRounded({570,420,200,200},0.3,6,lightblue);
         if(game.gameOver)

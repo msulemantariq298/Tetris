@@ -14,6 +14,7 @@ class Game
         void MoveBlockRight();
         void MoveBlockDown();
         bool gameOver;
+        int score;
 
     private:
         vector<Block> blocks;
@@ -24,4 +25,5 @@ class Game
         void LockBlock();
         bool BlockFits();
         void Reset();
+        void UpdateScore(int LinesCleared,int moveDownPoints);
 };

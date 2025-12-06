@@ -25,11 +25,11 @@ main()
 
     Font font = LoadFontEx("Font/monogram.ttf",64,0,0); // loading custom font
 
-
     Game game;                        // an object is made of class Game to use funtions initialized in Game class
     
     while(WindowShouldClose() == false)          // this function allows the window to remain open until user presses ESC or clicks on close 
     {
+        UpdateMusicStream(game.music);
         game.HandleInput();                      // a funtion defined in Game class used by game object
         if(EventTriggered(0.2))
         {
@@ -55,7 +55,11 @@ main()
         DrawTextEx(font,"NEXT",{610,350},64,4,WHITE);
         DrawRectangleRounded({570,420,200,200},0.3,6,lightblue);
         if(game.gameOver)
-        DrawTextEx(font,"GAME OVER!",{520,700},64,4,WHITE);
+        {
+            DrawTextEx(font,"GAME OVER!",{520,700},64,4,WHITE);
+            DrawTextEx(font,"Press (R) to Restart.",{510,770},32,2,WHITE);
+        }
+
         game.Draw();                             // Draw funtion defined in Game class us used to draw the grid and random block
         EndDrawing();
     }

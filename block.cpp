@@ -10,12 +10,12 @@ Block::Block()
     columnOffset=0;
 }
 
-void Block::Draw()          // Function to draw the block on the screen
+void Block::Draw(int offsetX,int offsetY)          // Function to draw the block on the screen
 {
     vector<Position> tiles = GetCellPositions();
     for(Position item: tiles)
     {
-        DrawRectangle(item.column*cellsize+1,item.row*cellsize+1,cellsize-1,cellsize-1,colors[id]);
+        DrawRectangle(item.column*cellsize+offsetX,item.row*cellsize+offsetY,cellsize-1,cellsize-1,colors[id]);
     }
 }
 

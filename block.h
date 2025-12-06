@@ -16,7 +16,7 @@ private:
     
 public:
     Block();
-    void Draw();
+    void Draw(int offseX,int offsetY);
     void Move(int rows, int columns);
     vector<Position> GetCellPositions();
     void Rotate();

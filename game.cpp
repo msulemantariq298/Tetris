@@ -9,6 +9,21 @@ Game::Game()
     nextBlock=GetRandomBlock();
     gameOver=false;
     score=0;
+    InitAudioDevice();
+    music=LoadMusicStream("Sounds/tetris.mp3");
+    PlayMusicStream(music);
+    rotateSound=LoadSound("Sounds/rotate.mp3");
+    clearSound=LoadSound("Sounds/clear.mp3");
+    gameOverSound=LoadSound("Sounds/gameover.mp3");
+}
+
+Game::~Game()
+{
+    UnloadSound(gameOverSound);
+    UnloadSound(rotateSound);
+    UnloadSound(clearSound);
+    UnloadMusicStream(music);
+    CloseAudioDevice();
 }
 
 Block Game::GetRandomBlock()
@@ -31,7 +46,18 @@ vector<Block> Game::GetAllBlocks()
 void Game::Draw()
 {
     grid.Draw();
-    currentBlock.Draw();
+    currentBlock.Draw(1,1);
+    switch(nextBlock.id)
+    {
+        case 3:
+        nextBlock.Draw(445,495);
+        break;
+        case 4:
+        nextBlock.Draw(450,475);
+        break;
+        default:
+        nextBlock.Draw(470,475);
+    }
 }
 
 void Game::HandleInput()
@@ -119,6 +145,10 @@ void Game::RotateBlock()
         {
             currentBlock.UndoRotation();
         }
+        else
+        {
+            PlaySound(rotateSound);
+        }
     }
 }
 
@@ -133,10 +163,15 @@ void Game::LockBlock()
     if(BlockFits()==false)
     {
         gameOver=true;
+        PlaySound(gameOverSound);
     }
     nextBlock=GetRandomBlock();
     int rowsCleared=grid.ClearFullRows();
-    UpdateScore(rowsCleared,0);
+    if(rowsCleared>0)
+    {
+        PlaySound(clearSound);
+        UpdateScore(rowsCleared,0);
+    }
 }
 
 bool Game::BlockFits()
